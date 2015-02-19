@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker run -d --net=host -v /etc/haproxy/  zollie/haproxy
+docker run -d --name=haproxy --net=host -v /etc/haproxy/  zollie/haproxy
 
