@@ -1,0 +1,36 @@
+global
+    daemon
+    maxconn 4096
+    stats socket {{haproxySocketPath}} level admin
+
+defaults
+    log global
+    option dontlognull
+    mode tcp
+    timeout connect 5000ms
+    timeout client 50000ms
+    timeout server 50000ms
+    option redispatch
+    retries 3
+    balance roundrobin
+
+listen stats :1988
+    mode http
+    stats enable
+    stats hide-version
+    stats admin if TRUE
+    stats refresh 2s    
+    stats uri /
+    #stats realm Haproxy\ Stats
+    #stats auth showme:showme    
+
+{{#each frontends}}
+  frontend {{key}}
+    {{frontendHelper this}}
+{{/each}}
+
+{{#each backends}}
+  backend {{key}}
+    {{backendHelper this}}
+{{/each}}
+
