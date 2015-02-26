@@ -1,3 +1,3 @@
-#!/bin/
+#!/bin/bash
 
-haproxy -db -f /etc/haproxy/haproxy.cfg
+haproxy -db -f /haproxy/haproxy.cfg
